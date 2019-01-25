@@ -2,6 +2,7 @@
 
 # take every path in the repo ending in .md
 cd Pages
+rm *.html
 for infile in *md; do
     touch temp.md
     # add links to home index at top and bottom of page

@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="markdown.css" />
 <p><a href="../index.html">Home</a></p>
-<h1 id="end-to-end-ml-project">End-to-end ML Project</h1>
+<h1 id="end-to-end-ml-project">2. End-to-end ML Project</h1>
 <ul>
 <li>Popular data repositories:
 <ul>
@@ -9,63 +9,76 @@
 <li><a href="https://en.wikipedia.org/wiki/List_of_datasets_for_machine_learning_research">List of datasets for machine learning research - Wikipedia</a></li>
 <li><a href="http://kaggle.com/">Kaggle: Your Home for Data Science</a></li>
 </ul></li>
-<li>Background: You’re hired as a data scientist for a real estate investment company to analyze the housing market in California.
-<ul>
-<li>What can we do to help the firm invest better in real estate?</li>
-<li>The dataset: <a href="https://www.kaggle.com/camnugent/california-housing-prices">California Housing Prices | Kaggle</a>
-<ul>
-<li>Based on US Census Bureau</li>
-<li>Organized by district (600-3000 people)</li>
-</ul></li>
-</ul></li>
 </ul>
 <h2 id="main-steps-of-a-ml-project">8 Main Steps of a ML Project</h2>
-<ol type="1">
-<li>Look at the big picture.
+<h3 id="look-at-the-big-picture">1. Look at the big picture</h3>
 <ul>
-<li>Questions that must be answered before starting</li>
 <li>Ask the purpose of building a model -&gt; frame your problems and objectives:
 <ul>
 <li>What do you expect, use, and benefit from this model?</li>
 <li>What learning algorithm to use?</li>
 <li>What performance measure to evaluate (metric)?
 <ul>
-<li>One option is <strong>Mean Abosulte Error</strong> (<img style="vertical-align:middle" src="https://latex.codecogs.com/png.latex?%7Cresidual%7C" alt="|residual|" title="|residual|" />)</li>
+<li>One option is <strong>Mean Absolute Error</strong> (<img style="vertical-align:middle" src="https://latex.codecogs.com/png.latex?%7Cresidual%7C" alt="|residual|" title="|residual|" />)
+<ul>
 <li><img style="vertical-align:middle" src="https://latex.codecogs.com/png.latex?MAE%28X%2Ch%29%20%3D%20%5Cfrac%7B1%7D%7Bm%7D%5Csum_%7Bi%3D1%7D%5Em%7Ch%28x%5E%7B%28i%29%7D%29-y%5E%7B%28i%29%7D%7C" alt="MAE(X,h) = \frac{1}{m}\sum_{i=1}^m|h(x^{(i)})-y^{(i)}|" title="MAE(X,h) = \frac{1}{m}\sum_{i=1}^m|h(x^{(i)})-y^{(i)}|" /></li>
 <li><img style="vertical-align:middle" src="https://latex.codecogs.com/png.latex?m" alt="m" title="m" /> is the number of instances, h is the hypothesis function</li>
-<li>Another option is the <strong>Root Mean Square Error</strong></li>
+</ul></li>
+<li>Another option is the <strong>Root Mean Square Error</strong>
+<ul>
 <li><img style="vertical-align:middle" src="https://latex.codecogs.com/png.latex?RMSE%28X%2Ch%29%20%3D%20%5Csqrt%7B%5Cfrac%7B1%7D%7Bm%7D%5Csum_%7Bi%3D1%7D%5Em%28h%28x%5E%7B%28i%29%7D%29-y%5E%7B%28i%29%7D%29%5E2%7D" alt="RMSE(X,h) = \sqrt{\frac{1}{m}\sum_{i=1}^m(h(x^{(i)})-y^{(i)})^2}" title="RMSE(X,h) = \sqrt{\frac{1}{m}\sum_{i=1}^m(h(x^{(i)})-y^{(i)})^2}" /></li>
 </ul></li>
-<li>How much effort to be spent?<br />
-</li>
 </ul></li>
+<li>How much effort to be spent?</li>
 </ul></li>
-<li>Get the data.
+</ul>
+<h3 id="get-the-data.">2. Get the data.</h3>
 <ul>
 <li>Load data from a .csv file with <code>df = pd.read_csv(csv_path)</code></li>
 <li><code>df.head()</code> prints the first 5 rows in a dataframe</li>
 <li><code>df.info()</code> provides you an overview of the dataframe</li>
 <li><code>df.describe()</code> provides you with basic statistics</li>
 <li>Create train and test sets with <code>train_set, test_set = train_test_split(df,test_size=TEST_PROP,random_state=SEED)</code> from <code>sklearn.model_selection</code></li>
-</ul></li>
-<li>Discover and visualize the data to gain insights
+</ul>
+<h3 id="discover-and-visualize-the-data-to-gain-insights">3. Discover and visualize the data to gain insights</h3>
 <ul>
 <li>Plot a histogram with <code>df.hist()</code></li>
 <li>Discover and visualize the data with <code>df.plot(kind=?,x=X_COL,y=Y_COL)</code></li>
 <li>Look at correlations with <code>corr_matrix = df.corr()</code></li>
 <li>Check all correlations with <code>df.scatter_matrix()</code></li>
 <li>Experiment with Feature Extraction like so: <code>df[&quot;New feature&quot;] = df[&quot;Feature 1&quot;] &lt;MATH OPERATION&gt; df[&quot;Feature 2&quot;]</code></li>
-</ul></li>
-<li>Prepare the data for Machine Learning algorithms (data cleaning)
+</ul>
+<h3 id="prepare-the-data-for-machine-learning-algorithms-data-cleaning">4. Prepare the data for Machine Learning algorithms (data cleaning)</h3>
 <ul>
 <li>Dectect missing values <code>incomplete_rows = df[df.isnull().any(axis=1)]</code></li>
 <li>Fill in missing values with <code>imputer = Imputer(strategy=?)</code> and then <code>arr = imputer.transform(df)</code></li>
 <li>Process categorical inputs, possibly by encoding the categories with <code>cat_encoder = OneHotEncoder(sparse=False)</code> and then <code>arr = cat_encoder.fit(df_category_columns)</code></li>
 <li>Use <code>Pipeline</code> for a sequence of transormations with <code>num_pipe = Pipeline([(STRATEGY 1),(STRATEGY 2),(STRATEGY 3...)])</code> followed by <code>arr = num_pipe.fit_transform(df_num_categories)</code></li>
-</ul></li>
-<li>Select a model and train it.</li>
-<li>Fine-tune your model</li>
-<li>Present your solution</li>
-<li>Launch, Monitor,</li>
-</ol>
+<li>Combine columns with <code>ColumnTransformer</code>, similar syntax to the <code>Pipeline</code>.</li>
+</ul>
+<h3 id="select-a-model-and-train-it.">5. Select a model and train it.</h3>
+<ul>
+<li>Pick the model, not much else to be said. Linear regressions, decision tree regressions, random forest regression, etc.</li>
+<li>evaluate on some test data: you can use <code>df.iloc[]</code> to select a few training instances (same syntax as lists)</li>
+<li>After fitting, compare against the actual values (the labels are a column in your dataframe)</li>
+<li>Calculate the errors with <code>mean_squared_error(labels,predictions)</code> or <code>mean_absolute_error(labels,predictions)</code>. Both are imported from <code>sklearn.metrics</code></li>
+<li>Evaluate with <code>cross_val_score</code></li>
+</ul>
+<h3 id="fine-tune-your-model">6. Fine-tune your model</h3>
+<ul>
+<li>Run a grid search on the parameters to determine the best hyperparameters.</li>
+</ul>
+<h3 id="present-your-solution">7. Present your solution</h3>
+<ul>
+<li>Evaluate on the test set</li>
+<li>Create a nice presentation with visual aids</li>
+</ul>
+<h3 id="launch-monitor-and-maintain">8. Launch, Monitor, and Maintain</h3>
+<ul>
+<li>Update the model over time with new training data</li>
+<li>Evaluate based on the field experts</li>
+<li>Ensure the quality of incoming training data</li>
+<li>refresh the model at a regular interval</li>
+<li>Backup the previous model</li>
+</ul>
 <p><a href="../index.html">Home</a></p>

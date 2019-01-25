@@ -18,7 +18,21 @@ html = f"""<!DOCTYPE html>
    {links}
 </ul>
 </body>
-</html>"""
+ <head>
+ <style type ="text/css" >
+   .footer{{ 
+       position: fixed;     
+       text-align: center;    
+       bottom: 0px; 
+       width: 100%;
+   }}  
+</style>
+</head>
+<body>
+    <div class="footer"><a href="https://github.com/jrodal98">My github</a></div>
+</body>
+</html>
+"""
 
 with open("index.html","w") as f:
     f.write(html)
